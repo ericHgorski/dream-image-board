@@ -1,10 +1,33 @@
 <!doctype html>
 <html>
 <head>
-    <title></title>
+    <title>My Imageboard</title>
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
+    <h1>Lets try not to fuck up so bad this time.</h1> <br>
+    <h2>Latest Images:</h2>
+
+    <div id="main">
+        <div id="main-container">
+
+            <div v-for="image in images" class="image">
+                                            <img :src="image.url" class="image">
+
+                                <figcaption class="caption">{{ image.title }}</figcaption>
+
+                </div>
+            </div>
+   
+   
+   
+   
+   
+   
+   
+    </div>
     <script src="/js/vue.js"></script>
     <script src="/js/axios.min.js"></script>
+    <script src="js/script.js"></script>
 </body>
 </html>
