@@ -1,26 +1,75 @@
-#main-container {
-    width: 90%;
+#images {
+    width: 80%;
     margin: 15px auto;
     display: grid;
     grid-template-rows: repeat(2, minmax(150px, max-content));
     grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    grid-auto-rows: min-content;
     justify-items: center;
+    gap: 20px;
 }
 
-.image {
+.image-container {
     display: grid;
     grid-template-rows: 150px 20px;
-    width: 220px;
+    width: 100%;
     margin: 10px;
     border-radius: 2%;
-
     border: black 2px solid;
     overflow: hidden;
     text-align: center;
 }
-img {
+.image {
     justify-self: center;
     max-height: 150px;
-    max-width: 180px;
+    min-width: 180px;
 }
+#input-bar {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(100px, max-content));
+    justify-content: center;
+    gap: 10px;
+}
+
+.inputfile {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+}
+
+.button {
+    background: linear-gradient(to bottom, #74ad5a 5%, #68a54b 100%);
+    background-color: #6aa150;
+    font-size: 12px;
+    font-weight: bold;
+    border: 1px solid #34661b;
+    cursor: pointer;
+    color: #ffffff;
+    -webkit-appearance: button;
+}
+.button:hover {
+    background: linear-gradient(to bottom, #68a54b 5%, #74ad5a 100%);
+    background-color: #68a54b;
+}
+
+label {
+    font-size: 0.75;
+    font-weight: 700;
+    color: white;
+    background-color: black;
+    cursor: pointer;
+    text-align: center;
+}
+
+label:hover {
+    background-color: red;
+}
+
+::placeholder {
+    text-transform: uppercase;
+}
+/* .red {
+    border: red solid 2px;
+} */

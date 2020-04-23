@@ -1,33 +1,30 @@
 <!doctype html>
 <html>
 <head>
-    <title>My Imageboard</title>
+    <title>IMAGE | BOARD</title>
     <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-    <h1>Lets try not to fuck up so bad this time.</h1> <br>
-    <h2>Latest Images:</h2>
+    <h1 style="display:flex;justify-content: center;">IMAGE | BOARD</h1>
 
     <div id="main">
-        <div id="main-container">
-
-            <div v-for="image in images" class="image">
-                                            <img :src="image.url" class="image">
-
-                                <figcaption class="caption">{{ image.title }}</figcaption>
-
-                </div>
+            <form id="input-bar">
+                <input v-model="title" autocomplete="off" type="text" name="title" placeholder="title">
+                <input v-model="description" autocomplete="off" type="text" name="description" placeholder="description">
+                <input v-model="username" autocomplete="off" type="text" name="username" placeholder="username">
+                <input type="file" name="file" id="file" accept ="image/*" class="inputfile" @change='handleChange'>
+                <label for="file">Choose a file</label> 
+                <button class="button" :class="{red: title.length < 3}" @click="handleClick">Submit</button>
+            </form>
+            <div id="images">
+            <div v-for="image in images" class="image-container">
+                <img :src="image.url" class="image">
+                <figcaption class="caption">{{ image.title }}</figcaption>
             </div>
-   
-   
-   
-   
-   
-   
-   
+            </div>
     </div>
     <script src="/js/vue.js"></script>
     <script src="/js/axios.min.js"></script>
-    <script src="js/script.js"></script>
+    <script src="/js/script.js"></script>
 </body>
 </html>

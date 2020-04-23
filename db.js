@@ -6,6 +6,23 @@ module.exports.getImages = () => {
     return db.query(`SELECT * FROM images`).then(({ rows }) => rows);
 };
 
+module.exports.addNewImage = (url, username, title, description) => {
+    return db.query(
+        `
+    INSERT INTO images (url, username, title, description)
+    VALUES ($1, $2, $3, $4) RETURNING created_at;`,
+        [url, username, title, description]
+    );
+};
+// // INSERT NEW ACCOUNT REGISTRATION INFO AND RETURN ID.
+// module.exports.addNewAccount = (first, last, email, password) => {
+//     return db.query(
+//         `INSERT INTO users (first, last, email, password)
+//         VALUES ($1, $2, $3, $4) RETURNING id;`,
+//         [first, last, email, password]
+//     );
+// };
+
 // // GET THE SIGNATURE WITH A GIVEN USER_ID
 // module.exports.getSignature = (id) => {
 //     return db.query(`SELECT signature FROM signatures WHERE id=$1`, [id]).then(({ rows }) => rows[0].signature);
