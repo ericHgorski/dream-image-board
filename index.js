@@ -5,6 +5,7 @@ const s3 = require("./s3");
 const { s3Url } = require("./config.json");
 
 app.use(express.static("./public"));
+app.use(express.json());
 
 // IMAGE UPLOAD BOILERPLATE
 const multer = require("multer");
@@ -29,6 +30,7 @@ const uploader = multer({
     },
 });
 
+// GET ALL IMAGES WHEN PAGE IS LOADED
 app.get("/images", (req, res) => {
     db.getImages()
         .then((result) => res.json(result))
@@ -37,6 +39,7 @@ app.get("/images", (req, res) => {
         });
 });
 
+// POST REQUEST FOR NEW IMAGE UPLOAD
 app.post("/upload", uploader.single("file"), s3.upload, (req, res) => {
     req.body.url = `${s3Url}${req.file.filename}`;
     const { url, username, title, description } = req.body;
@@ -45,7 +48,17 @@ app.post("/upload", uploader.single("file"), s3.upload, (req, res) => {
         res.json(req.body);
     } else {
         res.sendStatus(500);
+        console.log("no file found in request");
     }
 });
 
-app.listen(8080, () => console.log("Image board ready for business..."));
+//GET IMAGE WITH CORRESPONDING ID
+app.get("/image/:imageId", (req, res) => {
+    console.log("req.params.imageId :>> ", req.params.imageId);
+    db.getImageInfo(req.params.imageId).then(({ rows }) => {
+        console.log("getImageInfo db get request: ", rows[0]);
+        res.json(rows[0]);
+    });
+});
+
+app.listen(8080, () => console.log("Image board ready for business on 8080..."));

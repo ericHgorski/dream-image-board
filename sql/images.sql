@@ -1,4 +1,4 @@
-DROP TABLE IF EXISTS images;
+DROP TABLE IF EXISTS images, comments;
 
 CREATE TABLE images(
     id SERIAL PRIMARY KEY,
@@ -6,6 +6,14 @@ CREATE TABLE images(
     username VARCHAR NOT NULL,
     title VARCHAR NOT NULL,
     description TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE comments(
+    id SERIAL PRIMARY KEY,
+    comment VARCHAR NOT NULL,
+    username VARCHAR NOT NULL,
+    img_id INT NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
@@ -20,7 +28,7 @@ INSERT INTO images (url, username, title, description) VALUES (
     'https://s3.amazonaws.com/spicedling/wg8d94G_HrWdq7bU_2wT6Y6F3zrX-kej.jpg',
     'discoduck',
     'Elvis',
-    'We can''t go on together with suspicious minds.'
+    'We can''t go on together with suspicious minds.' 
 );
 
 INSERT INTO images (url, username, title, description) VALUES (

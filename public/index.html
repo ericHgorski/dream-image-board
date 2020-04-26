@@ -4,9 +4,11 @@
     <title>IMAGE | BOARD</title>
     <link rel="stylesheet" href="/css/style.css">
 </head>
+
 <body>
     <h1 style="display:flex;justify-content: center;">IMAGE | BOARD</h1>
 
+    <!-- ---------------------BEGIN MAIN--------------------- -->
     <div id="main">
             <form id="input-bar">
                 <input v-model="title" autocomplete="off" type="text" name="title" placeholder="title">
@@ -16,13 +18,38 @@
                 <label for="file">Choose a file</label> 
                 <button class="button" :class="{red: title.length < 3}" @click="handleClick">Submit</button>
             </form>
+
+
+
+                    <image-modal v-if="selectedImage"
+                     :id="selectedImage"></image-modal>
+
+
+
             <div id="images">
-            <div v-for="image in images" class="image-container">
+            <div v-for="image in images" @click="selectedImage = image.id" class="image-container">
                 <img :src="image.url" class="image">
                 <figcaption class="caption">{{ image.title }}</figcaption>
             </div>
             </div>
     </div>
+    <!----------------------- END MAIN--------------------- -->
+    
+
+
+    
+    <!----------------------- BEGIN TEMPLATE  ----------------------->
+        <script id="template" type="text/x-template">
+        <div>
+            <h1>{{ id }}</h1>
+
+        </div>
+        </script>
+    <!----------------------- END TEMPLATE  ----------------------->
+
+
+
+
     <script src="/js/vue.js"></script>
     <script src="/js/axios.min.js"></script>
     <script src="/js/script.js"></script>
