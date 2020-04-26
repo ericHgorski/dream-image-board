@@ -54,9 +54,16 @@ app.post("/upload", uploader.single("file"), s3.upload, (req, res) => {
 
 //GET IMAGE WITH CORRESPONDING ID
 app.get("/image/:imageId", (req, res) => {
-    console.log("req.params.imageId :>> ", req.params.imageId);
     db.getImageInfo(req.params.imageId).then(({ rows }) => {
         console.log("getImageInfo db get request: ", rows[0]);
+        res.json(rows[0]);
+    });
+});
+
+//GET COMMENTS ASSOCIATED WITH GIVEN IMAGE ID
+app.get("/get-comments/:imageId", (req, res) => {
+    db.getImageComments(req.params.imageId).then(({ rows }) => {
+        console.log("get comments db get request: ", rows[0]);
         res.json(rows[0]);
     });
 });

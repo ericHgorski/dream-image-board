@@ -33,8 +33,7 @@ module.exports.addNewComment = (comment, username, img_id) => {
     return db.query(
         `
     INSERT INTO comments (comment, username, img_id)
-    VALUES ($1, $2, $3)
-    RETURNING *`,
+    VALUES ($1, $2, $3)`,
         [comment, username, img_id]
     );
 };

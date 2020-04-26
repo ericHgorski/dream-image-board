@@ -5,24 +5,56 @@
         template: "#template",
         props: ["postTitle", "id"],
         mounted: function () {
+            console.log("this.id :>> ", this.id);
             var self = this;
-            axios.get(`/image/${this.id}`).then(function (resp) {
-                console.log("resp.data from axios get image info request: ", resp.data);
-            });
-            console.log("id in mounted of my component: ", this.id);
+            axios
+                .get(`/image/${this.id}`)
+                .then(function ({ data }) {
+                    console.log("self.username :>> ", data.username);
+                    console.log("resp.username :>> ", data.username);
+                    console.log("self :>> ", self);
+                    self.username = data.username;
+                    self.title = data.title;
+                    self.url = data.url;
+                    self.description = data.description;
+                    self.created_at = data.created_at;
+                    console.log("resp.data from axios get image info request: ", data);
+                })
+                .catch(function (err) {
+                    "error in compoent get image/id axios request: ", err;
+                });
+            axios
+                .get(`/get-comments/${this.id}`)
+                .then(function ({ data }) {
+                    self.comments = data;
+                    console.log("self.comments :>> ", self.comments);
+                    console.log("response inside comments axios", data);
+                })
+                .catch(function (err) {
+                    console.log("error in component get-comments axios request", err);
+                });
         },
         data: function () {
             return {
                 image: {},
+                url: "",
+                title: "",
+                description: "",
                 comments: [],
                 newComment: "",
-                poster: "",
+                username: "",
+                created_at: "",
+                comment: "",
+                commenter: "",
             };
         },
         methods: {
             closeModal: function () {
                 console.log("i am emitting from the component... (child)");
                 this.$emit("close");
+            },
+            addComment: function () {
+                console.log("try to add a comment");
             },
         },
     });

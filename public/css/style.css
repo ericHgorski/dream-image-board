@@ -54,6 +54,10 @@
     background-color: #68a54b;
 }
 
+#modal-container {
+    border: red dotted 3px;
+}
+
 label {
     font-size: 0.75;
     font-weight: 700;

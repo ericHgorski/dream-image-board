@@ -16,38 +16,48 @@
                 <input v-model="username" autocomplete="off" type="text" name="username" placeholder="username">
                 <input type="file" name="file" id="file" accept ="image/*" class="inputfile" @change='handleChange'>
                 <label for="file">Choose a file</label> 
-                <button class="button" :class="{red: title.length < 3}" @click="handleClick">Submit</button>
+                <button class="button" @click="handleClick">Submit</button>
             </form>
 
-
-
-                    <image-modal v-if="selectedImage"
-                     :id="selectedImage"></image-modal>
-
-
+            <image-modal v-if="selectedImage"
+                     :id="selectedImage" @close="closeModal">
+            </image-modal>
 
             <div id="images">
-            <div v-for="image in images" @click="selectedImage = image.id" class="image-container">
-                <img :src="image.url" class="image">
-                <figcaption class="caption">{{ image.title }}</figcaption>
-            </div>
+                <div v-for="image in images" class="image-container">
+                    <img :src="image.url" @click="selectedImage = image.id" class="image">
+                    <figcaption class="caption">{{ image.title }}</figcaption>
+                </div>
             </div>
     </div>
     <!----------------------- END MAIN--------------------- -->
     
 
 
-    
-    <!----------------------- BEGIN TEMPLATE  ----------------------->
+
+    <!----------------------- BEGIN MODAL TEMPLATE  ----------------------->
         <script id="template" type="text/x-template">
-        <div>
-            <h1>{{ id }}</h1>
+            <div id= "modal-container">
+                <p id="x" @click="closeModal">X</p>
+                <h3>Title: {{title}}</h3>
+                <p> Description: {{description}}</p>
+                <img :src="url" :alt="image.description" width="400">
+                <p> Uploaded by {{username}} at {{created_at}}</p>
+                            
+                <div class="comment" v-for='com in comments'>
+                    <h5> {{com.username}} says {{com.comment}} at {{com.created_at}} </h5>
+                </div>
 
-        </div>
+                <!-- <form>
+                    <h4>Add a comment</h4>
+                    <input v-model='comment' type="text" name='comment' placeholder="Comment">
+                    <input v-model='commenter' type="text" name="commenter" placeholder="Your username">
+                    <button @click='addComment'>Post New Comment</button>
+                </form> -->
+
+            </div>
         </script>
-    <!----------------------- END TEMPLATE  ----------------------->
-
-
+    <!----------------------- END MODAL TEMPLATE  ----------------------->
 
 
     <script src="/js/vue.js"></script>
