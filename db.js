@@ -29,11 +29,12 @@ module.exports.getImageComments = (id) => {
 };
 
 //ADD NEW COMMENT
-module.exports.addNewComment = (comment, username, img_id) => {
+module.exports.addNewComment = (comment, commenter, img_id) => {
     return db.query(
         `
-    INSERT INTO comments (comment, username, img_id)
-    VALUES ($1, $2, $3)`,
-        [comment, username, img_id]
+    INSERT INTO comments (comment, commenter, img_id)
+    VALUES ($1, $2, $3)
+    RETURNING *`,
+        [comment, commenter, img_id]
     );
 };

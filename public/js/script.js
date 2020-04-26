@@ -10,9 +10,6 @@
             axios
                 .get(`/image/${this.id}`)
                 .then(function ({ data }) {
-                    console.log("self.username :>> ", data.username);
-                    console.log("resp.username :>> ", data.username);
-                    console.log("self :>> ", self);
                     self.username = data.username;
                     self.title = data.title;
                     self.url = data.url;
@@ -21,13 +18,13 @@
                     console.log("resp.data from axios get image info request: ", data);
                 })
                 .catch(function (err) {
-                    "error in compoent get image/id axios request: ", err;
+                    "error in component get image/id axios request: ", err;
                 });
             axios
                 .get(`/get-comments/${this.id}`)
                 .then(function ({ data }) {
-                    self.comments = data;
-                    console.log("self.comments :>> ", self.comments);
+                    console.log("data.rows[0] :>> ", data.rows[0]);
+                    self.comments.unshift(data.rows[0]);
                     console.log("response inside comments axios", data);
                 })
                 .catch(function (err) {
@@ -41,7 +38,6 @@
                 title: "",
                 description: "",
                 comments: [],
-                newComment: "",
                 username: "",
                 created_at: "",
                 comment: "",
@@ -50,11 +46,26 @@
         },
         methods: {
             closeModal: function () {
-                console.log("i am emitting from the component... (child)");
-                this.$emit("close");
+                this.$emit("close"); // used with closeModal method in parent vue instance
             },
-            addComment: function () {
-                console.log("try to add a comment");
+            addComment: function (e) {
+                // Prevent refresh on form submission
+                e.preventDefault();
+                var self = this;
+                let newComment = {
+                    comment: this.comment,
+                    commenter: this.commenter,
+                };
+                axios
+                    .post(`post-new-comment/${this.id}`, newComment)
+                    .then(function (resp) {
+                        console.log("resp for axios post new comment :>> ", resp.data[0]);
+                        self.comments.unshift(resp.data[0]);
+                    })
+
+                    .catch(function (err) {
+                        console.log("error in post new comment axios request", err);
+                    });
             },
         },
     });
@@ -72,8 +83,8 @@
         // When page loads, get image links from database and add them to data object to be rendered.
         mounted: function () {
             var self = this;
-            axios.get("/images").then(function (resp) {
-                self.images = resp.data;
+            axios.get("/images").then(function ({ data }) {
+                self.images = data;
             });
         },
         methods: {
@@ -82,7 +93,7 @@
                 e.preventDefault();
                 var self = this;
 
-                // FormData required here because of file upload.
+                // FormData required because of file upload.
                 var formData = new FormData();
                 formData.append("title", this.title);
                 formData.append("description", this.description);

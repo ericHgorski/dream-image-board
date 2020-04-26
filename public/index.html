@@ -41,19 +41,20 @@
                 <p id="x" @click="closeModal">X</p>
                 <h3>Title: {{title}}</h3>
                 <p> Description: {{description}}</p>
-                <img :src="url" :alt="image.description" width="400">
+                <img :src="url" :alt="image.description" >
                 <p> Uploaded by {{username}} at {{created_at}}</p>
-                            
-                <div class="comment" v-for='com in comments'>
-                    <h5> {{com.username}} says {{com.comment}} at {{com.created_at}} </h5>
-                </div>
+                        
 
-                <!-- <form>
+                <form>
                     <h4>Add a comment</h4>
                     <input v-model='comment' type="text" name='comment' placeholder="Comment">
                     <input v-model='commenter' type="text" name="commenter" placeholder="Your username">
                     <button @click='addComment'>Post New Comment</button>
-                </form> -->
+                </form>
+
+                <div class="comment" v-if="comments.length > 0" v-for='comment in comments'>
+                    <h5> {{comment.commenter}} says {{comment.comment}} at {{comment.created_at}} </h5>
+                </div>
 
             </div>
         </script>
