@@ -23,8 +23,8 @@
             axios
                 .get(`/get-comments/${this.id}`)
                 .then(function ({ data }) {
-                    console.log("data.rows[0] :>> ", data.rows[0]);
-                    self.comments.unshift(data.rows[0]);
+                    console.log("data.rows[0] :>> ", data);
+                    self.comments = data;
                     console.log("response inside comments axios", data);
                 })
                 .catch(function (err) {

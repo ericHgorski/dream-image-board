@@ -44,6 +44,7 @@ app.get("/images", (req, res) => {
 // POST REQUEST FOR NEW IMAGE UPLOAD.
 app.post("/upload", uploader.single("file"), s3.upload, (req, res) => {
     req.body.url = `${s3Url}${req.file.filename}`;
+    console.log("uploading file now");
     const { url, username, title, description } = req.body;
     if (req.file) {
         db.addNewImage(url, username, title, description);
