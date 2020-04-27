@@ -41,7 +41,7 @@ app.get("/images", (req, res) => {
         });
 });
 
-app.get("/get-more-images", (req, res) => {
+app.get("/more-images", (req, res) => {
     db.getMoreImages()
         .then((result) => res.json(result))
         .catch((err) => {

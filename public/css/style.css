@@ -89,12 +89,19 @@
 }
 
 label {
-    font-size: 0.75;
-    font-weight: 700;
-    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    border: 1px solid #34661b;
+    cursor: pointer;
+    color: #ffffff;
+    -webkit-appearance: button;
     background-color: black;
     cursor: pointer;
     text-align: center;
+}
+label:hover {
+    background: linear-gradient(to bottom, #68a54b 5%, #74ad5a 100%);
+    background-color: #68a54b;
 }
 
 ::placeholder {

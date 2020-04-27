@@ -59,7 +59,6 @@
                 axios
                     .post(`post-new-comment/${this.id}`, newComment)
                     .then(function (resp) {
-                        console.log("resp for axios post new comment :>> ", resp.data[0]);
                         self.comments.unshift(resp.data[0]);
                     })
 
@@ -92,6 +91,30 @@
                 self.selectedImage = location.hash.slice(1);
             });
         },
+        watch: {
+            images: function infiniteScroll() {
+                console.log("this before setTimeout :>> ", this);
+                setTimeout(
+                    function () {
+                        console.log("CHECKING SCROLL");
+                        console.log("this before if: ", this);
+                        if (window.innerHeight + window.scrollY + 100 >= document.body.offsetHeight) {
+                            console.log("this.images :>> ", this.images);
+                            // console.log("self.images[self.images.length -1] :>> ", self.images[self.images.length - 1]);
+                            // let lastImg = self.images[self.images.length - 1];
+                            // console.log("lastId :>> ", lastImg.id);
+                            // axios.get("/get-more-images/:lastId").then(function ({ data }) {
+                            //     self.images.push(data);
+                            // });
+                            infiniteScroll();
+                        } else {
+                            infiniteScroll();
+                        }
+                    }.bind(this),
+                    500
+                );
+            },
+        },
         methods: {
             handleClick: function (e) {
                 // Prevent submit button from causing page refresh.
@@ -105,11 +128,11 @@
                 formData.append("username", this.username);
                 formData.append("file", this.file);
 
-                // Axios post request to send image data as response to be rendered by change to data images array
+                // Axios post request to send image data as response to be rendered by change to data images array.
                 axios
                     .post("/upload", formData)
-                    .then(function (resp) {
-                        self.images.unshift(resp.data);
+                    .then(function ({ data }) {
+                        self.images.unshift(data);
                     })
                     .catch(function (err) {
                         console.log("error in post /upload: ", err);
@@ -118,9 +141,6 @@
             handleChange: function (e) {
                 // Selects the file that was just uploaded.
                 this.file = e.target.files[0];
-            },
-            nearPageBottom: function () {
-                return window.innerHeight + window.scrollY + 100 >= document.body.offsetHeight;
             },
             closeModal: function () {
                 location.hash = "";
