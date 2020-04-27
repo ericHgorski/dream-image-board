@@ -119,5 +119,27 @@
                 this.selectedImage = null;
             },
         },
+        watch: {
+            // When image prop changes, check scrolling position and (potentially) load more results
+            images: function infiniteScroll() {
+                var self = this;
+                setTimeout(function () {
+                    console.log("CHECKING SCROLL");
+                    if (window.innerHeight + window.scrollY + 100 >= document.body.offsetHeight) {
+                        console.log("self :>> ", self);
+                        console.log("self.images :>> ", self.images);
+                        console.log("self.images[self.images.length -1] :>> ", self.images[self.images.length - 1]);
+                        let lastImg = self.images[self.images.length - 1];
+                        console.log("lastId :>> ", lastImg.id);
+                        axios.get("/get-more-images/:lastId").then(function ({ data }) {
+                            self.images.push(data);
+                        });
+                        infiniteScroll();
+                    } else {
+                        infiniteScroll();
+                    }
+                }, 500);
+            },
+        },
     });
 })();

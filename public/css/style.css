@@ -11,6 +11,12 @@
     background-color: rgba(100, 200, 144, 0.5);
     width: 100%;
 }
+#x {
+    cursor: pointer;
+    background-color: red;
+    width: 13px;
+}
+
 .image-container {
     display: grid;
     grid-template-rows: 150px 20px;

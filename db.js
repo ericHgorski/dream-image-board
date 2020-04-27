@@ -1,9 +1,29 @@
 const spicedPg = require("spiced-pg");
 var db = spicedPg(process.env.DATABASE_URL || "postgres:postgres:postgres@localhost:5432/imageboard");
 
-// RETRIEVE IMAGES
+// RETRIEVE IMAGES ON PAGE LOAD
 module.exports.getImages = () => {
-    return db.query(`SELECT * FROM images`).then(({ rows }) => rows.reverse());
+    return db
+        .query(
+            `
+    SELECT * FROM images 
+    ORDER BY id DESC
+    LIMIT 5`
+        )
+        .then(({ rows }) => rows);
+};
+
+// RETRIEVE NEXT BATCH OF IMAGE WHEN SCROLL IS AT BOTTOM OF PAGE
+
+module.exports.getMoreImages = (lastId) => {
+    return db.query(
+        `
+        SELECT * FROM images
+        WHERE id < $1
+        ORDER BY id DESC
+        LIMIT 10`,
+        [lastId]
+    );
 };
 
 //ADD A NEW IMAGE
@@ -11,7 +31,8 @@ module.exports.addNewImage = (url, username, title, description) => {
     return db.query(
         `
     INSERT INTO images (url, username, title, description)
-    VALUES ($1, $2, $3, $4) RETURNING created_at;`,
+    VALUES ($1, $2, $3, $4) 
+    RETURNING created_at;`,
         [url, username, title, description]
     );
 };

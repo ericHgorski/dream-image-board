@@ -41,6 +41,14 @@ app.get("/images", (req, res) => {
         });
 });
 
+app.get("/get-more-images", (req, res) => {
+    db.getMoreImages()
+        .then((result) => res.json(result))
+        .catch((err) => {
+            console.log("Error in db.getMoreImages: ", err);
+        });
+});
+
 // POST REQUEST FOR NEW IMAGE UPLOAD.
 app.post("/upload", uploader.single("file"), s3.upload, (req, res) => {
     req.body.url = `${s3Url}${req.file.filename}`;
