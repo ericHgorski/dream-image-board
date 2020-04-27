@@ -64,10 +64,6 @@
     gap: 20px;
 }
 
-#modal-image {
-    max-width: 90%;
-}
-
 #modal-comment-info {
     grid-column: 2/3;
 }
@@ -110,3 +106,7 @@ label:hover {
 /* .red {
     border: red solid 2px;
 } */
+#modal-image {
+    max-width: 100%;
+    min-width: 99%;
+}

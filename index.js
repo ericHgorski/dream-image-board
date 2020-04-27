@@ -84,13 +84,8 @@ app.get("/get-comments/:imageId", (req, res) => {
 //POST NEW COMMENT ON GIVEN IMAGE.
 app.post("/post-new-comment/:id", (req, res) => {
     let { comment, commenter } = req.body;
-    console.log("req.params :>> ", req.params);
-    console.log("comment :>> ", comment);
-    console.log("commenter :>> ", commenter);
-    console.log("id :>> ", req.params.id);
     db.addNewComment(comment, commenter, req.params.id)
         .then(({ rows }) => {
-            console.log("results from add new comment db request :>> ", rows);
             res.json(rows);
         })
         .catch((err) => {

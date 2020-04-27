@@ -4,33 +4,6 @@
     Vue.component("image-modal", {
         template: "#template",
         props: ["postTitle", "id"],
-        mounted: function () {
-            console.log("this.id :>> ", this.id);
-            var self = this;
-            axios
-                .get(`/image/${this.id}`)
-                .then(function ({ data }) {
-                    self.username = data.username;
-                    self.title = data.title;
-                    self.url = data.url;
-                    self.description = data.description;
-                    self.created_at = data.created_at;
-                    console.log("resp.data from axios get image info request: ", data);
-                })
-                .catch(function (err) {
-                    "error in component get image/id axios request: ", err;
-                });
-            axios
-                .get(`/get-comments/${this.id}`)
-                .then(function ({ data }) {
-                    console.log("data.rows[0] :>> ", data);
-                    self.comments = data;
-                    console.log("response inside comments axios", data);
-                })
-                .catch(function (err) {
-                    console.log("error in component get-comments axios request", err);
-                });
-        },
         data: function () {
             return {
                 image: {},
@@ -44,14 +17,41 @@
                 commenter: "",
             };
         },
+        mounted: function mountedModal() {
+            this.getModal();
+        },
+        watch: {
+            id: function watchModal() {
+                this.getModal();
+            },
+        },
         methods: {
+            getModal: function () {
+                const self = this;
+                axios
+                    .get(`/image/${self.id}`)
+                    .then(function ({ data }) {
+                        self.image = data;
+                    })
+                    .catch(function (err) {
+                        "error in component get image/id axios request: ", err;
+                    });
+                axios
+                    .get(`/get-comments/${this.id}`)
+                    .then(function ({ data }) {
+                        self.comments = data;
+                    })
+                    .catch(function (err) {
+                        console.log("error in component get-comments axios request", err);
+                    });
+            },
             closeModal: function () {
                 this.$emit("close"); // used with closeModal method in parent vue instance
             },
             addComment: function (e) {
                 // Prevent refresh on form submission
                 e.preventDefault();
-                var self = this;
+                const self = this;
                 let newComment = {
                     comment: this.comment,
                     commenter: this.commenter,
@@ -78,20 +78,25 @@
             description: "",
             username: "",
             file: null,
-            selectedImage: null,
+            selectedImage: location.hash.slice(1), // provides link sharing functionality via #
+            nearBottom: false, // used for infinite scrolling feature
         },
         // When page loads, get image links from database and add them to data object to be rendered.
         mounted: function () {
-            var self = this;
+            const self = this;
             axios.get("/images").then(function ({ data }) {
                 self.images = data;
+            });
+            // When url is set to image id, change selectedImage value and launch corresponding modal
+            window.addEventListener("hashchange", function () {
+                self.selectedImage = location.hash.slice(1);
             });
         },
         methods: {
             handleClick: function (e) {
-                // We don't want submit button to cause page refresh.
+                // Prevent submit button from causing page refresh.
                 e.preventDefault();
-                var self = this;
+                const self = this;
 
                 // FormData required because of file upload.
                 var formData = new FormData();
@@ -114,31 +119,12 @@
                 // Selects the file that was just uploaded.
                 this.file = e.target.files[0];
             },
-            closeModal: function () {
-                console.log("Parent is now closing modal");
-                this.selectedImage = null;
+            nearPageBottom: function () {
+                return window.innerHeight + window.scrollY + 100 >= document.body.offsetHeight;
             },
-        },
-        watch: {
-            // When image prop changes, check scrolling position and (potentially) load more results
-            images: function infiniteScroll() {
-                var self = this;
-                setTimeout(function () {
-                    console.log("CHECKING SCROLL");
-                    if (window.innerHeight + window.scrollY + 100 >= document.body.offsetHeight) {
-                        console.log("self :>> ", self);
-                        console.log("self.images :>> ", self.images);
-                        console.log("self.images[self.images.length -1] :>> ", self.images[self.images.length - 1]);
-                        let lastImg = self.images[self.images.length - 1];
-                        console.log("lastId :>> ", lastImg.id);
-                        axios.get("/get-more-images/:lastId").then(function ({ data }) {
-                            self.images.push(data);
-                        });
-                        infiniteScroll();
-                    } else {
-                        infiniteScroll();
-                    }
-                }, 500);
+            closeModal: function () {
+                location.hash = "";
+                this.selectedImage = null;
             },
         },
     });
