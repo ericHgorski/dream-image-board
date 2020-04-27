@@ -17,11 +17,11 @@
                 commenter: "",
             };
         },
-        mounted: function mountedModal() {
+        mounted: function () {
             this.getModal();
         },
         watch: {
-            id: function watchModal() {
+            id: function () {
                 this.getModal();
             },
         },
