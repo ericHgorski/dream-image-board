@@ -29,10 +29,13 @@ h1 {
 
 #x {
     cursor: pointer;
-    background-color: black;
-    width: 15px;
-    margin: -10px;
+    background-color: red;
+    width: 18px;
     text-align: center;
+    position: fixed;
+    left: 20.8%;
+    top: 5%;
+    z-index: 6;
 }
 
 .image-container {
@@ -46,7 +49,7 @@ h1 {
     text-align: center;
 }
 #modal-container img {
-    max-width: 300px;
+    max-width: 100%;
 }
 .image {
     justify-self: center;
@@ -75,12 +78,13 @@ h1 {
     z-index: 5;
     top: 50%;
     left: 50%;
-    height: 80%;
-    width: 40%;
+    height: 90%;
+    width: 60%;
     transform: translate(-50%, -50%);
     background-color: black;
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
     color: white;
 }
 #overlay {
@@ -96,9 +100,7 @@ h1 {
 }
 
 #modal-comment-info {
-    grid-column: 2/3;
-    padding-top: 30px;
-    padding-left: 10px;
+    padding-top: 10px;
 }
 
 .button {

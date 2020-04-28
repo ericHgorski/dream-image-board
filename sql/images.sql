@@ -6,7 +6,7 @@ CREATE TABLE images(
     username VARCHAR NOT NULL,
     title VARCHAR NOT NULL,
     description TEXT,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP(1)
 );
 
 CREATE TABLE comments(
@@ -14,7 +14,7 @@ CREATE TABLE comments(
     comment VARCHAR NOT NULL,
     commenter VARCHAR NOT NULL,
     img_id INT NOT NULL,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP(1)
 );
 
 INSERT INTO images (url, username, title, description) VALUES (

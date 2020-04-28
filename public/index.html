@@ -40,9 +40,10 @@
     <!----------------------- BEGIN MODAL TEMPLATE  ----------------------->
         <script id="template" type="text/x-template">
             <div id="overlay">
+                                <p id="x" @click="closeModal">X</p>
+
             <div id= "modal-container">
                 <div id="modal-picture-info">
-                <p id="x" @click="closeModal">X</p>
                 <h3>Title: {{image.title}}</h3>
                 <p> {{image.description}}</p>
                 <img :src="image.url" id="modal-image" :alt="image.description" height="500" >
@@ -53,7 +54,7 @@
                 <form>
                     <h4>Add a comment</h4>
                     <input v-model='comment' size="40" id="comment-box" type="text" name='comment' placeholder="Comment">
-                    <input v-model='commenter' type="text" name="commenter" placeholder="Your username">
+                    <input v-model='commenter' type="text" id="commenter-box" name="commenter" placeholder="Your username">
                     <button @click='addComment'>Post New Comment</button>
                 </form>
 

@@ -60,6 +60,7 @@
             addComment: function (e) {
                 // Prevent refresh on form submission
                 e.preventDefault();
+
                 const self = this;
                 let newComment = {
                     comment: this.comment,
@@ -74,6 +75,8 @@
                     .catch(function (err) {
                         console.log("error in post new comment axios request", err);
                     });
+                document.getElementById("comment-box").value = "";
+                document.getElementById("commenter-box").value = "";
             },
         },
     });
@@ -139,7 +142,7 @@
                 var self = this;
                 setTimeout(() => {
                     var lastImageId = self.images[self.images.length - 1].id;
-                    if (window.innerHeight + window.scrollY + 200 >= document.body.offsetHeight) {
+                    if (window.innerHeight + window.scrollY + 200 >= document.body.offsetHeight && lastImageId > 1) {
                         axios.get(`/get-more-images/${lastImageId}`).then(function ({ data }) {
                             self.images.push(data);
                         });

@@ -8,7 +8,7 @@ module.exports.getImages = () => {
             `
     SELECT * FROM images 
     ORDER BY id DESC
-    LIMIT 1`
+    LIMIT 10`
         )
         .then(({ rows }) => rows);
 };
@@ -22,7 +22,7 @@ module.exports.getMoreImages = (lastId) => {
         SELECT * FROM images
         WHERE id < $1
         ORDER BY id DESC
-        LIMIT 1`,
+        LIMIT 10`,
             [lastId]
         )
         .then(({ rows }) => rows[0]);
@@ -41,8 +41,11 @@ module.exports.addNewImage = (url, username, title, description) => {
 
 // GET INFO PERTAINING TO SELECTED IMAGE
 module.exports.getImageInfo = (id) => {
-    return db.query(`
-    SELECT * FROM images WHERE id = ${id}`);
+    return db.query(
+        `
+    SELECT * FROM images WHERE id = $1`,
+        [id]
+    );
 };
 
 // GET ALL COMMENTS FOR IMAGE
