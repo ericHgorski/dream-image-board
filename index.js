@@ -32,17 +32,18 @@ const uploader = multer({
 
 //--------------------- IMAGE RENDERING AND UPLOADING --------------//
 
-// GET ALL IMAGES WHEN PAGE IS LOADED.
-app.get("/images", (req, res) => {
-    db.getImages()
-        .then((result) => {
-            res.json(result);
-        })
-        .catch((err) => {
-            console.log("Error in db.getImage: ", err);
-        });
-});
+// Get all images upon page load.
+// app.get("/images", (req, res) => {
+//     db.getImages()
+//         .then((result) => {
+//             res.json(result);
+//         })
+//         .catch((err) => {
+//             console.log("Error in db.getImage: ", err);
+//         });
+// });
 
+// Get more images starting using id of last image as a reference point
 app.get("/get-more-images/:lastImageId", (req, res) => {
     // If not the first image to be uploaded then get more images through infinite scroll
     db.getMoreImages(req.params.lastImageId)

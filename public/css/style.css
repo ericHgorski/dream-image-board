@@ -68,7 +68,7 @@ h4 {
     grid-template-rows: repeat(2, minmax(300px, max-content));
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     justify-items: center;
-    gap: 70px;
+    gap: 50px;
 }
 
 .image-container {
@@ -81,6 +81,7 @@ h4 {
     overflow: hidden;
     text-align: center;
     justify-content: center;
+    max-width: 330px;
 }
 
 .image {

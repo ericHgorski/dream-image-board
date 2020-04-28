@@ -53,6 +53,7 @@
                 axios
                     .get(`/get-comments/${this.id}`)
                     .then(function ({ data }) {
+                        self.$parent.formatTime(data);
                         self.comments = data;
                     })
                     .catch(function (err) {
@@ -73,8 +74,9 @@
                 };
                 axios
                     .post(`post-new-comment/${this.id}`, newComment)
-                    .then(function (resp) {
-                        self.comments.unshift(resp.data[0]);
+                    .then(function ({ data }) {
+                        self.$parent.formatTime(data);
+                        self.comments.unshift(data[0]);
                     })
 
                     .catch(function (err) {
@@ -98,6 +100,7 @@
         mounted: function () {
             const self = this;
             axios.get("/images").then(function ({ data }) {
+                self.formatTime(data);
                 self.images = data;
                 self.infiniteScroll();
             });
@@ -150,6 +153,13 @@
                         self.infiniteScroll();
                     }
                 }, 500);
+            }, // reformat SQL's terrible and uncooperative timestamps for viewing pleasure
+            formatTime: function (arr) {
+                arr.forEach(function (item) {
+                    let date = item.created_at.substring(0, 10);
+                    let time = item.created_at.substring(11, 16);
+                    item.created_at = `${date} — ${time}`;
+                });
             },
         },
     });

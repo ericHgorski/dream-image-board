@@ -56,10 +56,10 @@
                 <a v-if="image.id > 1" :href="'#' + (image.id - 1)" id="left-arrow"><</a>
                 <div id= "modal-container">
                 <div id="modal-picture-info">
-                <h3>Title: {{image.title}}</h3>
+                <h2>{{image.title}}</h2>
                 <p> {{image.description}}</p>
                 <img :src="image.url" id="modal-image" :alt="image.description" height="500" >
-                <p> Uploaded by {{image.username}} at {{image.created_at}}</p>
+                <p> Uploaded by {{image.username}}</p>
                 </div>
                         
                 <div id="modal-comment-info">
