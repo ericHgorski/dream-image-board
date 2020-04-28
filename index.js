@@ -36,7 +36,9 @@ const uploader = multer({
 // GET ALL IMAGES WHEN PAGE IS LOADED.
 app.get("/images", (req, res) => {
     db.getImages()
-        .then((result) => res.json(result))
+        .then((result) => {
+            res.json(result);
+        })
         .catch((err) => {
             console.log("Error in db.getImage: ", err);
         });

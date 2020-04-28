@@ -36,9 +36,6 @@
                 axios
                     .get(`/image/${self.id}`)
                     .then(function ({ data }) {
-                        // if (data == null) {
-                        //     self.selectedImage = null
-                        // }
                         self.image = data;
                     })
                     .catch(function (err) {
@@ -60,8 +57,6 @@
             addComment: function (e) {
                 // Prevent refresh on form submission
                 e.preventDefault();
-                document.getElementById("comment-box").value = "";
-                document.getElementById("commenter-box").value = "";
 
                 const self = this;
                 let newComment = {
@@ -90,7 +85,6 @@
             username: "",
             file: null,
             selectedImage: location.hash.slice(1), // provides link sharing functionality via #
-            nearBottom: false, // used for infinite scrolling feature
         },
         // When page loads, get image links from database and add them to data object to be rendered.
         mounted: function () {
@@ -104,9 +98,6 @@
                 self.selectedImage = location.hash.slice(1);
             });
         },
-        // watch: {
-        //     images: this.infiniteScroll(),
-        // },
         methods: {
             handleClick: function (e) {
                 // Prevent submit button from causing page refresh.

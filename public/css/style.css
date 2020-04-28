@@ -92,7 +92,7 @@ h4 {
 a {
     text-decoration: none;
     color: rgb(87, 88, 199);
-    font-size: 20px;
+    font-size: 17px;
 }
 
 /* ================= MODAL =================  */
@@ -131,6 +131,7 @@ a {
 #modal-container img {
     max-width: 100%;
     border: white solid 1px;
+    min-width: 540px;
 }
 
 .comment {
@@ -153,6 +154,20 @@ a {
     left: 21.2%;
     top: 4.8%;
     z-index: 6;
+}
+
+#left-arrow {
+    font-size: 100px;
+    position: fixed;
+    left: 10%;
+    top: 45%;
+    text-shadow: -1px -1px 0 white, 1px -1px 0 white, -1px 1px 0 white, 1px 1px 0 white}
+#right-arrow {
+    font-size: 100px;
+    position: fixed;
+    left: 90%;
+    top: 45%;
+    text-shadow: -1px -1px 0 white, 1px -1px 0 white, -1px 1px 0 white, 1px 1px 0 white}
 }
 
 #modal-comment-info {

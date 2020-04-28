@@ -6,8 +6,9 @@ module.exports.getImages = () => {
     return db
         .query(
             `
-    SELECT * FROM images 
-    ORDER BY id DESC
+    SELECT *
+    FROM images 
+    ORDER BY id DESC 
     LIMIT 6`
         )
         .then(({ rows }) => rows);
@@ -19,7 +20,8 @@ module.exports.getMoreImages = (lastId) => {
     return db
         .query(
             `
-        SELECT * FROM images
+        SELECT *
+        FROM images
         WHERE id < $1
         ORDER BY id DESC
         LIMIT 10`,
