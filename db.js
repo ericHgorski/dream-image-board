@@ -8,7 +8,7 @@ module.exports.getImages = () => {
             `
     SELECT * FROM images 
     ORDER BY id DESC
-    LIMIT 10`
+    LIMIT 6`
         )
         .then(({ rows }) => rows);
 };

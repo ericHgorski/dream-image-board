@@ -2,6 +2,7 @@ const express = require("express");
 const db = require("./db");
 const app = express();
 const s3 = require("./s3");
+const moment = require("moment");
 const { s3Url } = require("./config.json");
 
 app.use(express.static("./public")); // serve static files in public folder.
@@ -26,7 +27,7 @@ const diskStorage = multer.diskStorage({
 const uploader = multer({
     storage: diskStorage,
     limits: {
-        fileSize: 2097152,
+        fileSize: 5097152,
     },
 });
 
@@ -43,13 +44,11 @@ app.get("/images", (req, res) => {
 
 app.get("/get-more-images/:lastImageId", (req, res) => {
     // If not the first image to be uploaded then get more images through infinite scroll
-    // if (req.params.lastImageId != 1) {
     db.getMoreImages(req.params.lastImageId)
         .then((result) => res.json(result))
         .catch((err) => {
             console.log("Error in db.getMoreImages: ", err);
         });
-    // }
 });
 
 // POST REQUEST FOR NEW IMAGE UPLOAD.

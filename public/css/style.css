@@ -3,11 +3,63 @@
     font-family: "Raleway", sans-serif;
     letter-spacing: 1px;
 }
-h1 {
-    /* font-family: "Pacifico", cursive; */
-    font-size: 50px;
-    text-shadow: 4px 4px rgb(100, 200, 144);
+
+/* ================= HEADER =================  */
+
+header {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
 }
+h1 {
+    margin: 10px;
+    font-size: 50px;
+    color: darkgrey;
+    text-shadow: 3px 3px rgb(87, 88, 199);
+}
+
+h4 {
+    color: rgb(87, 88, 199);
+}
+
+/* ================= INPUT BAR =================  */
+
+#input-bar {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(100px, max-content));
+    justify-content: center;
+    gap: 10px;
+}
+
+.inp {
+    position: relative;
+    margin: auto;
+    width: 100%;
+    max-width: 280px;
+    border-radius: 3px;
+    overflow: hidden;
+}
+.input-file {
+    align-self: center;
+    max-width: 170px;
+}
+
+#input-description,
+#input-title,
+#input-username {
+    -webkit-appearance: none;
+    width: 100%;
+    border: 0;
+    font-family: inherit;
+    height: 25px;
+    font-size: 12px;
+    font-weight: 400;
+    background: rgba(87, 87, 87, 0.2);
+    color: rgba(87, 87, 87, 1);
+    padding-left: 5px;
+}
+
+/* ================= IMAGES CONTAINER =================  */
 
 #images {
     width: 80%;
@@ -17,25 +69,6 @@ h1 {
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     justify-items: center;
     gap: 70px;
-}
-.comment {
-    background-color: rgba(100, 200, 144, 0.5);
-    width: 95%;
-    margin-top: 15px;
-}
-.comment-content {
-    background-color: rgba(155, 200, 144, 0.5);
-}
-
-#x {
-    cursor: pointer;
-    background-color: red;
-    width: 18px;
-    text-align: center;
-    position: fixed;
-    left: 20.8%;
-    top: 5%;
-    z-index: 6;
 }
 
 .image-container {
@@ -47,30 +80,22 @@ h1 {
     border: black 2px solid;
     overflow: hidden;
     text-align: center;
+    justify-content: center;
 }
-#modal-container img {
-    max-width: 100%;
-}
+
 .image {
     justify-self: center;
     max-height: 270px;
     object-fit: cover;
 }
-#input-bar {
-    display: grid;
-    grid-template-columns: repeat(5, minmax(100px, max-content));
-    justify-content: center;
-    gap: 10px;
+
+a {
+    text-decoration: none;
+    color: rgb(87, 88, 199);
+    font-size: 20px;
 }
 
-.inputfile {
-    width: 0.1px;
-    height: 0.1px;
-    opacity: 0;
-    overflow: hidden;
-    position: absolute;
-    z-index: -1;
-}
+/* ================= MODAL =================  */
 
 #modal-container {
     position: fixed;
@@ -81,12 +106,16 @@ h1 {
     height: 90%;
     width: 60%;
     transform: translate(-50%, -50%);
-    background-color: black;
+    background-color: lightslategray;
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
     color: white;
+    margin: 10px;
+    padding: 10px;
+    border: white solid 3px;
 }
+
 #overlay {
     position: fixed;
     top: 0;
@@ -99,9 +128,47 @@ h1 {
     transition: 2s ease;
 }
 
+#modal-container img {
+    max-width: 100%;
+    border: white solid 1px;
+}
+
+.comment {
+    background-color: rgba(100, 200, 144, 0.5);
+    width: 95%;
+    margin-top: 15px;
+    padding: 5px;
+}
+.comment-content {
+    background-color: rgba(155, 200, 144, 0.5);
+    padding: 5px;
+}
+
+#x {
+    cursor: pointer;
+    background-color: white;
+    width: 18px;
+    text-align: center;
+    position: fixed;
+    left: 21.2%;
+    top: 4.8%;
+    z-index: 6;
+}
+
 #modal-comment-info {
     padding-top: 10px;
+    width: 100%;
 }
+/* ================= FOOTER =================  */
+
+footer {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    height: 50px;
+}
+
+/* ================= MISCELLANEOUS =================  */
 
 .button {
     background: linear-gradient(to bottom, #74ad5a 5%, #68a54b 100%);
@@ -113,28 +180,10 @@ h1 {
     color: #ffffff;
     -webkit-appearance: button;
 }
-label:hover,
+
 .button:hover {
     background: linear-gradient(to bottom, #68a54b 5%, #74ad5a 100%);
     background-color: #68a54b;
-}
-
-#modal-container {
-    margin: 10px;
-    padding: 10px;
-    border: white solid 3px;
-}
-
-label {
-    font-size: 12px;
-    font-weight: bold;
-    border: 1px solid #34661b;
-    cursor: pointer;
-    color: #ffffff;
-    -webkit-appearance: button;
-    background-color: black;
-    cursor: pointer;
-    text-align: center;
 }
 
 ::placeholder {

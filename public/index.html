@@ -1,22 +1,30 @@
 <!doctype html>
 <html>
 <head>
-    <title>IMAGE | BOARD</title>
+    <title>Dream Board</title>
     <link rel="stylesheet" href="/css/style.css">
 </head>
 
 <body>
-    <h1 style="display:flex;justify-content: center;">IMAGE | BOARD</h1>
+    <header>
+        <h1>DREAM BOARD</h1>
+        <h4>Dream to Believe, Believe to Imagine</h4>
+    </header>
 
     <!-- ---------------------BEGIN MAIN--------------------- -->
     <div id="main">
             <form id="input-bar">
-                <input v-model="title" autocomplete="off" type="text" name="title" placeholder="title">
-                <input v-model="description" autocomplete="off" type="text" name="description" placeholder="description">
-                <input v-model="username" autocomplete="off" type="text" name="username" placeholder="username">
-                <input type="file" name="file" id="file" accept ="image/*" class="inputfile" @change='handleChange'>
-                <label for="file">Choose a file</label> 
-                <button class="button" @click="handleClick">Submit</button>
+                <label for="input-title" class="inp">
+                    <input v-model="title" id="input-title" autocomplete="off" type="text" name="title" placeholder="title">
+                </label>
+                <label for="input-description" class="inp">
+                    <input v-model="description" id="input-description" autocomplete="off" type="text" name="description" placeholder="description">
+                </label>
+                <label for="input-username" class="inp">
+                    <input v-model="username" autocomplete="off" id="input-username" type="text" name="username" placeholder="username">
+                </label>
+                <input type="file" name="file" id="file" accept ="image/*" class="input-file" @change='handleChange'>
+                <button class="button" @click="handleClick">SUBMIT</button>
             </form>
 
             <image-modal v-if="selectedImage"
@@ -32,6 +40,9 @@
                 </div>
             </div>
     </div>
+    <footer>
+        <p>Images Courtesy of <a href="https://deepdreamgenerator.com/">Google Deep Dream</a>, sign up for an account <a href="https://deepdreamgenerator.com/sign-up">here</a>.</p>
+    </footer>
     <!----------------------- END MAIN--------------------- -->
     
 
@@ -52,10 +63,10 @@
                         
                 <div id="modal-comment-info">
                 <form>
-                    <h4>Add a comment</h4>
+                    <h4>ADD A COMMENT</h4>
                     <input v-model='comment' size="40" id="comment-box" type="text" name='comment' placeholder="Comment">
                     <input v-model='commenter' type="text" id="commenter-box" name="commenter" placeholder="Your username">
-                    <button @click='addComment'>Post New Comment</button>
+                    <button class="button" @click='addComment'>Post</button>
                 </form>
 
                 <div class="comment" v-if="comments.length > 0" v-for='comment in comments'>

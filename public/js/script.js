@@ -60,6 +60,8 @@
             addComment: function (e) {
                 // Prevent refresh on form submission
                 e.preventDefault();
+                document.getElementById("comment-box").value = "";
+                document.getElementById("commenter-box").value = "";
 
                 const self = this;
                 let newComment = {
@@ -75,8 +77,6 @@
                     .catch(function (err) {
                         console.log("error in post new comment axios request", err);
                     });
-                document.getElementById("comment-box").value = "";
-                document.getElementById("commenter-box").value = "";
             },
         },
     });
