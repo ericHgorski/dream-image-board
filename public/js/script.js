@@ -39,7 +39,6 @@
                         self.image = data;
                     })
                     .catch(function (err) {
-                        // self.$emit("close");
                         console.log("error in component get image/id axios request: ", err);
                     });
                 axios

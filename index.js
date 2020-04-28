@@ -2,7 +2,6 @@ const express = require("express");
 const db = require("./db");
 const app = express();
 const s3 = require("./s3");
-const moment = require("moment");
 const { s3Url } = require("./config.json");
 
 app.use(express.static("./public")); // serve static files in public folder.
