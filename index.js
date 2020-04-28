@@ -41,25 +41,26 @@ app.get("/images", (req, res) => {
         });
 });
 
-app.get("/more-images", (req, res) => {
-    db.getMoreImages()
-        .then((result) => res.json(result))
-        .catch((err) => {
-            console.log("Error in db.getMoreImages: ", err);
-        });
+app.get("/get-more-images/:lastImageId", (req, res) => {
+    if (req.params.lastImageId != 1) {
+        db.getMoreImages(req.params.lastImageId)
+            .then((result) => res.json(result))
+            .catch((err) => {
+                console.log("Error in db.getMoreImages: ", err);
+            });
+    }
 });
 
 // POST REQUEST FOR NEW IMAGE UPLOAD.
 app.post("/upload", uploader.single("file"), s3.upload, (req, res) => {
     req.body.url = `${s3Url}${req.file.filename}`;
-    console.log("uploading file now");
     const { url, username, title, description } = req.body;
     if (req.file) {
         db.addNewImage(url, username, title, description);
         res.json(req.body);
     } else {
+        // If no file is found upon request.
         res.sendStatus(500);
-        console.log("no file found in request");
     }
 });
 

@@ -3,7 +3,7 @@
     // IMAGE-MODAL VUE COMPONENT
     Vue.component("image-modal", {
         template: "#template",
-        props: ["postTitle", "id"],
+        props: ["id"],
         data: function () {
             return {
                 image: {},
@@ -19,6 +19,11 @@
         },
         mounted: function () {
             this.getModal();
+            // Event listener, clicks outside of modal will automatically close modal
+            document.getElementById("overlay").addEventListener("click", function (e) {
+                if (e.target !== this) return;
+                location.hash = "";
+            });
         },
         watch: {
             id: function () {
@@ -31,10 +36,14 @@
                 axios
                     .get(`/image/${self.id}`)
                     .then(function ({ data }) {
+                        // if (data == null) {
+                        //     self.selectedImage = null
+                        // }
                         self.image = data;
                     })
                     .catch(function (err) {
-                        "error in component get image/id axios request: ", err;
+                        // self.$emit("close");
+                        console.log("error in component get image/id axios request: ", err);
                     });
                 axios
                     .get(`/get-comments/${this.id}`)
@@ -85,36 +94,16 @@
             const self = this;
             axios.get("/images").then(function ({ data }) {
                 self.images = data;
+                self.infiniteScroll();
             });
             // When url is set to image id, change selectedImage value and launch corresponding modal
             window.addEventListener("hashchange", function () {
                 self.selectedImage = location.hash.slice(1);
             });
         },
-        watch: {
-            images: function infiniteScroll() {
-                console.log("this before setTimeout :>> ", this);
-                setTimeout(
-                    function () {
-                        console.log("CHECKING SCROLL");
-                        console.log("this before if: ", this);
-                        if (window.innerHeight + window.scrollY + 100 >= document.body.offsetHeight) {
-                            console.log("this.images :>> ", this.images);
-                            // console.log("self.images[self.images.length -1] :>> ", self.images[self.images.length - 1]);
-                            // let lastImg = self.images[self.images.length - 1];
-                            // console.log("lastId :>> ", lastImg.id);
-                            // axios.get("/get-more-images/:lastId").then(function ({ data }) {
-                            //     self.images.push(data);
-                            // });
-                            infiniteScroll();
-                        } else {
-                            infiniteScroll();
-                        }
-                    }.bind(this),
-                    500
-                );
-            },
-        },
+        // watch: {
+        //     images: this.infiniteScroll(),
+        // },
         methods: {
             handleClick: function (e) {
                 // Prevent submit button from causing page refresh.
@@ -145,6 +134,20 @@
             closeModal: function () {
                 location.hash = "";
                 this.selectedImage = null;
+            },
+            infiniteScroll: function () {
+                var self = this;
+                setTimeout(() => {
+                    var lastImageId = self.images[self.images.length - 1].id;
+                    if (window.innerHeight + window.scrollY + 200 >= document.body.offsetHeight) {
+                        axios.get(`/get-more-images/${lastImageId}`).then(function ({ data }) {
+                            self.images.push(data);
+                        });
+                        self.infiniteScroll();
+                    } else {
+                        self.infiniteScroll();
+                    }
+                }, 500);
             },
         },
     });

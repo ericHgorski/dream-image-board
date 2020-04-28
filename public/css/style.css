@@ -1,3 +1,14 @@
+* {
+    box-sizing: border-box;
+    font-family: "Raleway", sans-serif;
+    letter-spacing: 1px;
+}
+h1 {
+    /* font-family: "Pacifico", cursive; */
+    font-size: 50px;
+    text-shadow: 4px 4px rgb(100, 200, 144);
+}
+
 #images {
     width: 80%;
     margin: 15px auto;
@@ -9,12 +20,19 @@
 }
 .comment {
     background-color: rgba(100, 200, 144, 0.5);
-    width: 100%;
+    width: 95%;
+    margin-top: 15px;
 }
+.comment-content {
+    background-color: rgba(155, 200, 144, 0.5);
+}
+
 #x {
     cursor: pointer;
-    background-color: red;
-    width: 13px;
+    background-color: black;
+    width: 15px;
+    margin: -10px;
+    text-align: center;
 }
 
 .image-container {
@@ -27,10 +45,13 @@
     overflow: hidden;
     text-align: center;
 }
-
+#modal-container img {
+    max-width: 300px;
+}
 .image {
     justify-self: center;
     max-height: 270px;
+    object-fit: cover;
 }
 #input-bar {
     display: grid;
@@ -49,22 +70,35 @@
 }
 
 #modal-container {
-    position: absolute;
-    /* top: 50%;
-    left: 50%; */
-    /* transform: translate(-50%, -50%); */
+    position: fixed;
+    overflow-y: scroll;
+    z-index: 5;
+    top: 50%;
+    left: 50%;
+    height: 80%;
+    width: 40%;
+    transform: translate(-50%, -50%);
+    background-color: black;
+    display: flex;
+    justify-content: center;
+    color: white;
+}
+#overlay {
+    position: fixed;
     top: 0;
+    bottom: 0;
     left: 0;
     right: 0;
-    bottom: 0;
-    background-color: white;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    transition: 2s ease;
 }
 
 #modal-comment-info {
     grid-column: 2/3;
+    padding-top: 30px;
+    padding-left: 10px;
 }
 
 .button {
@@ -77,6 +111,7 @@
     color: #ffffff;
     -webkit-appearance: button;
 }
+label:hover,
 .button:hover {
     background: linear-gradient(to bottom, #68a54b 5%, #74ad5a 100%);
     background-color: #68a54b;
@@ -85,7 +120,7 @@
 #modal-container {
     margin: 10px;
     padding: 10px;
-    border: red dotted 3px;
+    border: white solid 3px;
 }
 
 label {
@@ -98,10 +133,6 @@ label {
     background-color: black;
     cursor: pointer;
     text-align: center;
-}
-label:hover {
-    background: linear-gradient(to bottom, #68a54b 5%, #74ad5a 100%);
-    background-color: #68a54b;
 }
 
 ::placeholder {

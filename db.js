@@ -8,7 +8,7 @@ module.exports.getImages = () => {
             `
     SELECT * FROM images 
     ORDER BY id DESC
-    LIMIT 5`
+    LIMIT 1`
         )
         .then(({ rows }) => rows);
 };
@@ -16,14 +16,16 @@ module.exports.getImages = () => {
 // RETRIEVE NEXT BATCH OF IMAGE WHEN SCROLL IS AT BOTTOM OF PAGE
 
 module.exports.getMoreImages = (lastId) => {
-    return db.query(
-        `
+    return db
+        .query(
+            `
         SELECT * FROM images
         WHERE id < $1
         ORDER BY id DESC
-        LIMIT 10`,
-        [lastId]
-    );
+        LIMIT 1`,
+            [lastId]
+        )
+        .then(({ rows }) => rows[0]);
 };
 
 //ADD A NEW IMAGE
@@ -45,8 +47,12 @@ module.exports.getImageInfo = (id) => {
 
 // GET ALL COMMENTS FOR IMAGE
 module.exports.getImageComments = (id) => {
-    return db.query(`
-    SELECT * FROM comments WHERE img_id = ${id}`);
+    return db.query(
+        `
+    SELECT * FROM comments WHERE img_id = $1
+    ORDER BY id DESC`,
+        [id]
+    );
 };
 
 //ADD NEW COMMENT

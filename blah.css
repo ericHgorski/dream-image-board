@@ -1,0 +1,321 @@
+* {
+    box-sizing: border-box;
+    font-family: "Raleway", sans-serif;
+    letter-spacing: 1px;
+}
+
+form {
+    text-align: center;
+}
+
+.all-images {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.image-div {
+    margin: 0 auto;
+    border: 2px solid white;
+    position: relative;
+    display: flex;
+}
+
+.delete-image {
+    align-self: flex-start;
+    position: relative;
+    right: 20px;
+    bottom: 10px;
+    font-size: 18px;
+}
+
+.delete-image:hover {
+    cursor: pointer;
+    font-weight: bold;
+}
+
+img {
+    width: 460px;
+    height: 460px;
+    object-fit: cover;
+}
+
+.hr-in-form {
+    width: 70%;
+    margin-bottom: 30px;
+    border: 0.5px solid black;
+}
+
+#item-text {
+    position: absolute;
+    bottom: 5px;
+    background-color: black;
+    opacity: 0.6;
+    width: 100%;
+}
+
+#image-title {
+    color: white;
+    text-align: center;
+    font-weight: bolder;
+    white-space: pre-wrap;
+    font-size: 13px;
+}
+
+input[type="file"] {
+    opacity: 0.6;
+}
+
+/* INTRO PAGE */
+#intro {
+    position: absolute;
+    z-index: 20;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 1);
+}
+
+#intro-info {
+    position: relative;
+    text-align: center;
+    color: white;
+    top: 30%;
+}
+
+#intro-button-div {
+    display: flex;
+    justify-content: center;
+}
+
+#intro-name {
+    display: block;
+    font-size: 70px;
+    transition: 2s ease;
+}
+
+#enter-button {
+    position: absolute;
+    display: block;
+    margin: auto;
+    width: 50px;
+    height: 20px;
+    cursor: crosshair;
+    color: inherit;
+    background: none !important;
+    padding: 0 !important;
+    border: none;
+    border-bottom: 2px solid #444;
+    font-size: 18px;
+    z-index: 50;
+}
+
+#enter-button:hover,
+#enter-button:focus {
+    transition: 1s ease;
+    font-size: 20px;
+    width: 80px;
+    outline: 0;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+    transition: opacity 0.8s ease-out;
+}
+
+.fade-enter,
+.fade-leave-to {
+    opacity: 0;
+}
+
+/* HEADER  */
+header {
+    padding-left: 20px;
+    padding-right: 20px;
+    text-align: center;
+}
+
+#title {
+    display: inline-block;
+    position: relative;
+    font-weight: lighter;
+    font-size: 45px;
+    letter-spacing: 2px;
+}
+
+form {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+/* MODAL */
+#modal {
+    position: fixed;
+    overflow-y: scroll;
+    z-index: 10;
+    top: 50%;
+    left: 50%;
+    height: 85%;
+    width: 30%;
+    transform: translate(-50%, -50%);
+    background-color: black;
+    color: white;
+    padding-top: 15px;
+}
+
+#comment-box {
+    line-height: 30px;
+}
+
+.img-arrow-container {
+    display: inline-flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
+#img-in-modal {
+    cursor: pointer;
+    display: block;
+    width: 250px;
+    height: 250px;
+    object-fit: cover;
+}
+
+#text-in-modal {
+    text-align: center;
+}
+
+#hr-in-modal {
+    color: white;
+    width: 70%;
+    margin-bottom: 15px;
+}
+
+#comment-container {
+    height: 20%;
+    overflow-y: scroll;
+    border: 0.5px solid grey;
+    margin: 0 auto;
+    margin-bottom: 20px;
+    padding-top: 15px;
+    width: 80%;
+}
+
+#comments-in-modal {
+    display: flex;
+}
+
+#each-comment {
+    display: inline-block;
+    width: 80%;
+    text-align: center;
+    margin: 0 auto;
+    margin-bottom: 10px;
+    font-size: 13px;
+    color: grey;
+}
+
+#modaluser-in-comment {
+    display: inline-block;
+    width: 50%;
+    text-align: center;
+}
+
+.arrow {
+    font-size: 35px;
+}
+
+.right {
+    position: relative;
+    left: 50px;
+}
+
+.left {
+    position: relative;
+    right: 40px;
+}
+
+.arrow:hover {
+    cursor: pointer;
+    color: grey;
+}
+
+.a-modal {
+    width: 0px;
+}
+
+/* removes default style for links */
+a {
+    text-decoration: none;
+    color: white;
+}
+
+/* MORE BUTTON */
+#more-button-div {
+    width: 100%;
+    text-align: center;
+}
+
+#more-button {
+    cursor: crosshair;
+    width: 70px;
+    height: 20px;
+}
+
+#more-button:hover,
+.upload-button:hover,
+.submit-in-modal:hover {
+    background-color: black;
+    color: white;
+    font-weight: bold;
+    cursor: crosshair;
+}
+
+.delete-in-modal:hover {
+    background-color: black;
+    outline-color: red;
+    color: white;
+    font-weight: bold;
+    cursor: crosshair;
+}
+
+/* INPUT FIELD */
+input {
+    border-radius: 900em;
+    padding: 5px;
+    margin-right: 10px;
+}
+
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+    outline: none;
+}
+
+/* OVERLAY */
+#overlay {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    transition: 1s ease;
+}
+
+/* GIPHY START */
+.giphy-start {
+    text-align: center;
+}
+
+.error {
+    text-align: center;
+    color: red;
+}
