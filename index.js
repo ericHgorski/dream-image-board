@@ -95,4 +95,4 @@ app.post("/post-new-comment/:id", (req, res) => {
         });
 });
 
-app.listen(8080, () => console.log("Image board ready for business on 8080..."));
+app.listen(process.env.PORT || 8080, () => console.log("Image board ready for business on 8080..."));

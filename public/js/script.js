@@ -24,6 +24,15 @@
                 if (e.target !== this) return;
                 location.hash = "";
             });
+            // Arrow key navigational functionality for toggling between images in modal
+            document.body.addEventListener("keydown", function (e) {
+                if (e.which == 39) {
+                    document.getElementById("right-arrow").click();
+                }
+                if (e.which == 37) {
+                    document.getElementById("left-arrow").click();
+                }
+            });
         },
         watch: {
             id: function () {
