@@ -52,8 +52,8 @@
         <script id="template" type="text/x-template">
             <div id="overlay">
                 <p id="x" @click="closeModal">X</p>
-                <a v-if="image.id < Math.max.apply(Math, this.$parent.images.map(function(o) { return o.id; }))" :href="'#' + (image.id + 1)" id="right-arrow">></a>
-                <a v-if="image.id > 1" :href="'#' + (image.id - 1)" id="left-arrow"><</a>
+                <a v-if="image.id < Math.max.apply(Math, this.$parent.images.map(function(o) { return o.id; }))" :href="'#' + (image.id + 1)" class="arrow" id="right-arrow">></a>
+                <a v-if="image.id > 1" :href="'#' + (image.id - 1)" class="arrow" id="left-arrow"><</a>
                 <div id= "modal-container">
                 <div id="modal-picture-info">
                 <h2>{{image.title}}</h2>
@@ -63,7 +63,7 @@
                 </div>
                         
                 <div id="modal-comment-info">
-                <form>
+                <form id="comment-submission-tools"> 
                     <h4>ADD A COMMENT</h4>
                     <input v-model='comment' size="40" id="comment-box" type="text" name='comment' placeholder="Comment">
                     <input v-model='commenter' type="text" id="commenter-box" name="commenter" placeholder="Your username">

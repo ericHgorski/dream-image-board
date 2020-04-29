@@ -33,15 +33,16 @@ const uploader = multer({
 //--------------------- IMAGE RENDERING AND UPLOADING --------------//
 
 // Get all images upon page load.
-// app.get("/images", (req, res) => {
-//     db.getImages()
-//         .then((result) => {
-//             res.json(result);
-//         })
-//         .catch((err) => {
-//             console.log("Error in db.getImage: ", err);
-//         });
-// });
+app.get("/images", (req, res) => {
+    db.getImages()
+        .then((result) => {
+            res.json(result);
+            console.log("result :>> ", result);
+        })
+        .catch((err) => {
+            console.log("Error in db.getImage: ", err);
+        });
+});
 
 // Get more images starting using id of last image as a reference point
 app.get("/get-more-images/:lastImageId", (req, res) => {

@@ -157,24 +157,26 @@ a {
     z-index: 6;
 }
 
-#left-arrow {
+.arrow {
     font-size: 100px;
     position: fixed;
+    text-shadow: -1px -1px 0 white, 1px -1px 0 white, -1px 1px 0 white, 1px 1px 0 white;
+}
+
+#left-arrow {
     left: 10%;
     top: 45%;
-    text-shadow: -1px -1px 0 white, 1px -1px 0 white, -1px 1px 0 white, 1px 1px 0 white}
+}
 #right-arrow {
-    font-size: 100px;
-    position: fixed;
     left: 90%;
     top: 45%;
-    text-shadow: -1px -1px 0 white, 1px -1px 0 white, -1px 1px 0 white, 1px 1px 0 white}
 }
 
 #modal-comment-info {
     padding-top: 10px;
     width: 100%;
 }
+
 /* ================= FOOTER =================  */
 
 footer {
