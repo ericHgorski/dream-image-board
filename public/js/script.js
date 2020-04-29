@@ -77,6 +77,8 @@
                     .then(function ({ data }) {
                         self.$parent.formatTime(data);
                         self.comments.unshift(data[0]);
+                        self.commenter = "";
+                        self.comment = "";
                     })
 
                     .catch(function (err) {
@@ -127,6 +129,9 @@
                     .post("/upload", formData)
                     .then(function ({ data }) {
                         self.images.unshift(data);
+                        this.title = "";
+                        this.description = "";
+                        this.username = "";
                     })
                     .catch(function (err) {
                         console.log("error in post /upload: ", err);
