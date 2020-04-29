@@ -84,6 +84,7 @@ app.get("/get-comments/:imageId", (req, res) => {
         res.json(result.rows);
     });
 });
+asdfdas;
 
 //POST NEW COMMENT ON GIVEN IMAGE.
 app.post("/post-new-comment/:id", (req, res) => {
